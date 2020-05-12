@@ -1,10 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import {SearchBar} from 'react-native-elements';
 
-const MovieSearchScreen = () => {
+const MovieSearchScreen = ({navigation}) => {
   return (
     <View style={styles.screen}>
-      <Text>MovieSearchScreen</Text>
+      <SearchBar />
     </View>
   );
 };
@@ -12,8 +13,6 @@ const MovieSearchScreen = () => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 

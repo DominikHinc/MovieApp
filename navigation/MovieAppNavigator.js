@@ -9,11 +9,11 @@ function movieAppStack() {
   return (
     <MovieAppStackNavigator.Navigator headerMode="none">
       <MovieAppStackNavigator.Screen
-        name="CitySearch"
+        name="MovieSearch"
         component={MovieSearchScreen}
       />
       <MovieAppStackNavigator.Screen
-        name="CityWeather"
+        name="MovieDetails"
         component={MovieDetailsScreen}
       />
     </MovieAppStackNavigator.Navigator>
