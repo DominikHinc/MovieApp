@@ -8,7 +8,6 @@ export const searchMovieByTitle = title => {
     movieRequest.open('GET', url, true);
     movieRequest.responseType = 'json';
     movieRequest.onload = () => {
-      console.log(movieRequest.status);
       let status = movieRequest.status;
       if (status === 200) {
         resolve(movieRequest.response);
