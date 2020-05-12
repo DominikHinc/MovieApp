@@ -2,16 +2,19 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Alert, ActivityIndicator} from 'react-native';
 import SearchBar from '../components/SearchBar';
 import {searchMovieByTitle} from '../helpers/ApiCall';
+import MoviesPreviewList from '../components/MoviesPreviewList';
+import {Body, Container} from 'native-base';
 
 const MovieSearchScreen = ({navigation}) => {
   const [movieTitle, setMovieTitle] = useState('Hunger');
+  const [moviesList, setMoviesList] = useState([]);
 
   const [loading, setLoading] = useState(false);
 
   const searchMovie = () => {
     searchMovieByTitle(movieTitle)
       .then(result => {
-        // console.log(result);
+        setMoviesList(result.results);
       })
       .catch(error => {
         Alert.alert('Something went wrong', error);
@@ -35,12 +38,14 @@ const MovieSearchScreen = ({navigation}) => {
         onLeftIconPress={searchMovie}
         placeholder="Search Movie"
       />
-
-      {loading && (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="black" />
-        </View>
-      )}
+      <Container style={styles.listContainer}>
+        <MoviesPreviewList moviesList={moviesList} />
+        {loading && (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="black" />
+          </View>
+        )}
+      </Container>
     </View>
   );
 };
@@ -48,6 +53,9 @@ const MovieSearchScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+  },
+  listContainer: {
+    height: '100%',
   },
   loadingContainer: {
     height: '100%',

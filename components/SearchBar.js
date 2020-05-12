@@ -10,22 +10,20 @@ const SearchBar = ({
   placeholder,
 }) => {
   return (
-    <Container>
-      <Header searchBar rounded>
-        <Item>
-          <Icon name="ios-search" onPress={onLeftIconPress} />
-          <Input
-            placeholder={placeholder}
-            value={value}
-            onChangeText={onChangeText}
-          />
-          <Icon name="ios-close-circle" onPress={onRightIconPress} />
-        </Item>
-        <Button transparent>
-          <Text>{placeholder}</Text>
-        </Button>
-      </Header>
-    </Container>
+    <Header searchBar rounded>
+      <Item>
+        <Icon name="ios-search" onPress={onLeftIconPress} />
+        <Input
+          placeholder={placeholder}
+          value={value}
+          onChangeText={onChangeText}
+        />
+        <Icon name="ios-close-circle" onPress={onRightIconPress} />
+      </Item>
+      <Button transparent>
+        <Text>{placeholder}</Text>
+      </Button>
+    </Header>
   );
 };
 
