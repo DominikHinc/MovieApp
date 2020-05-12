@@ -1,11 +1,11 @@
+import {Container} from 'native-base';
 import React from 'react';
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 import MoviePreview from './MoviePreview';
-import {Container, Body} from 'native-base';
 
-const MoviesPreviewList = ({moviesList}) => {
+const MoviesPreviewList = ({moviesList, navigation}) => {
   const renderMoviePreview = ({item}) => {
-    return <MoviePreview movieData={item} />;
+    return <MoviePreview movieData={item} navigation={navigation} />;
   };
 
   return (

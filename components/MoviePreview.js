@@ -1,42 +1,51 @@
 import React from 'react';
-import {StyleSheet, View, Image} from 'react-native';
-import {Text, Icon} from 'react-native-elements';
+import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {Icon, Text} from 'react-native-elements';
 import Colors from '../constants/Colors';
 
-const MoviePreview = ({movieData}) => {
+const MoviePreview = ({movieData, navigation}) => {
   const {title, poster_path, popularity, vote_count} = movieData;
-  console.log(poster_path);
+
+  const navigateToDetailsScreen = () => {
+    navigation.navigate('MovieDetails', movieData);
+  };
+
   return (
     <View style={styles.previewMainContainer}>
-      <View style={styles.imageContainer}>
-        <Image
-          style={styles.posterImage}
-          source={{
-            uri:
-              poster_path !== null
-                ? `https://image.tmdb.org/t/p/w500${poster_path}`
-                : `https://resizing.flixster.com/kAZuhKR05XNS9t4e5pNoaKzLF9Q=/206x305/v1.bTsxMjExNzU1ODtqOzE4MzY1OzEyMDA7MjAwOzMwMA`,
-          }}
-        />
-      </View>
-      <View style={styles.infoContainer}>
-        <Text h4 h4Style={styles.title} numberOfLines={2}>
-          {title}
-        </Text>
-        <View style={styles.statisticsContainer}>
-          <View style={styles.labelIcon}>
-            <Icon name="star" color={Colors.yellow} />
-            <Text style={styles.statisticsLabel}> {vote_count}</Text>
-          </View>
-          <View style={styles.labelIcon}>
-            <Icon name="person" />
-            <Text style={styles.statisticsLabel}>
-              {' '}
-              {Math.round(popularity)}
-            </Text>
+      <TouchableOpacity
+        style={{flex: 1}}
+        activeOpacity={0.5}
+        onPress={navigateToDetailsScreen}>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.posterImage}
+            source={{
+              uri:
+                poster_path !== null
+                  ? `https://image.tmdb.org/t/p/w500${poster_path}`
+                  : `https://resizing.flixster.com/kAZuhKR05XNS9t4e5pNoaKzLF9Q=/206x305/v1.bTsxMjExNzU1ODtqOzE4MzY1OzEyMDA7MjAwOzMwMA`,
+            }}
+          />
+        </View>
+        <View style={styles.infoContainer}>
+          <Text h4 h4Style={styles.title} numberOfLines={2}>
+            {title}
+          </Text>
+          <View style={styles.statisticsContainer}>
+            <View style={styles.labelIcon}>
+              <Icon name="star" color={Colors.yellow} />
+              <Text style={styles.statisticsLabel}> {vote_count}</Text>
+            </View>
+            <View style={styles.labelIcon}>
+              <Icon name="person" />
+              <Text style={styles.statisticsLabel}>
+                {' '}
+                {Math.round(popularity)}
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

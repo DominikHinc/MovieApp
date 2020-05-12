@@ -1,16 +1,16 @@
+import {Container} from 'native-base';
 import React, {useState} from 'react';
 import {
+  ActivityIndicator,
+  Alert,
+  Keyboard,
   StyleSheet,
   View,
-  Alert,
-  ActivityIndicator,
-  Keyboard,
 } from 'react-native';
-import SearchBar from '../components/SearchBar';
-import {searchMovieByTitle} from '../helpers/ApiCall';
 import MoviesPreviewList from '../components/MoviesPreviewList';
-import {Body, Container} from 'native-base';
+import SearchBar from '../components/SearchBar';
 import Colors from '../constants/Colors';
+import {searchMovieByTitle} from '../helpers/ApiCall';
 
 const MovieSearchScreen = ({navigation}) => {
   const [movieTitle, setMovieTitle] = useState('Hunger');
@@ -54,7 +54,7 @@ const MovieSearchScreen = ({navigation}) => {
       />
       <Container style={styles.listContainer}>
         {!loading && moviesList.length > 0 && (
-          <MoviesPreviewList moviesList={moviesList} />
+          <MoviesPreviewList moviesList={moviesList} navigation={navigation} />
         )}
         {loading && (
           <View style={styles.loadingContainer}>
