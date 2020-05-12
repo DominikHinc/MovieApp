@@ -7,7 +7,7 @@ const MoviePreview = ({movieData, navigation}) => {
   const {title, poster_path, popularity, vote_count} = movieData;
 
   const navigateToDetailsScreen = () => {
-    navigation.navigate('MovieDetails', movieData);
+    navigation.navigate('MovieDetails', {movieData});
   };
 
   return (
