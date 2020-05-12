@@ -20,7 +20,7 @@ const MoviePreview = ({movieData}) => {
         />
       </View>
       <View style={styles.infoContainer}>
-        <Text h4 h4Style={styles.title}>
+        <Text h4 h4Style={styles.title} numberOfLines={2}>
           {title}
         </Text>
         <View style={styles.statisticsContainer}>
@@ -30,7 +30,7 @@ const MoviePreview = ({movieData}) => {
           </View>
           <View style={styles.labelIcon}>
             <Icon name="person" />
-            <Text style={styles.statisticsLabel}>{popularity}</Text>
+            <Text style={styles.statisticsLabel}>{Math.round(popularity)}</Text>
           </View>
         </View>
       </View>
@@ -57,14 +57,20 @@ const styles = StyleSheet.create({
   infoContainer: {
     alignItems: 'center',
     padding: 5,
+    flex: 1,
   },
   title: {
     fontSize: 15,
     color: 'white',
   },
   statisticsContainer: {
+    flex: 1,
+
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    width: '100%',
+    paddingHorizontal: 15,
   },
   labelIcon: {
     flexDirection: 'row',
