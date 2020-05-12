@@ -6,6 +6,7 @@ import {
   Keyboard,
   StyleSheet,
   View,
+  Text,
 } from 'react-native';
 import MoviesPreviewList from '../components/MoviesPreviewList';
 import SearchBar from '../components/SearchBar';
@@ -15,15 +16,20 @@ import {searchMovieByTitle} from '../helpers/ApiCall';
 const MovieSearchScreen = ({navigation}) => {
   const [movieTitle, setMovieTitle] = useState('Hunger');
   const [moviesList, setMoviesList] = useState([]);
+  const [couldNotFindAnyMovies, setCouldNotFindAnyMovies] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
   const searchMovie = () => {
     setLoading(true);
     Keyboard.dismiss();
+    setCouldNotFindAnyMovies(false);
     searchMovieByTitle(movieTitle)
       .then(result => {
         setMoviesList(result.results);
+        if (result.results.length === 0) {
+          setCouldNotFindAnyMovies(true);
+        }
       })
       .catch(error => {
         Alert.alert('Something went wrong', error);
@@ -55,6 +61,11 @@ const MovieSearchScreen = ({navigation}) => {
       <Container style={styles.listContainer}>
         {!loading && moviesList.length > 0 && (
           <MoviesPreviewList moviesList={moviesList} navigation={navigation} />
+        )}
+        {couldNotFindAnyMovies && (
+          <View style={styles.loadingContainer}>
+            <Text>Could not find any movies</Text>
+          </View>
         )}
         {loading && (
           <View style={styles.loadingContainer}>

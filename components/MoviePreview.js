@@ -74,15 +74,16 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 15,
     color: 'white',
+    textAlign: 'center',
   },
   statisticsContainer: {
     flex: 1,
-
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     width: '100%',
     paddingHorizontal: 15,
+    paddingTop: 5,
   },
   labelIcon: {
     flexDirection: 'row',
