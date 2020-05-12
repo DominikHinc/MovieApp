@@ -2,6 +2,11 @@ import React from 'react';
 import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {Icon, Text} from 'react-native-elements';
 import Colors from '../constants/Colors';
+import {
+  normalizePaddingSize,
+  normalizeBorderRadiusSize,
+  normalizeIconSize,
+} from '../helpers/normalizeSizes';
 
 const MoviePreview = ({movieData, navigation}) => {
   const {title, poster_path, popularity, vote_count} = movieData;
@@ -13,7 +18,7 @@ const MoviePreview = ({movieData, navigation}) => {
   return (
     <View style={styles.previewMainContainer}>
       <TouchableOpacity
-        style={{flex: 1}}
+        style={styles.touchable}
         activeOpacity={0.5}
         onPress={navigateToDetailsScreen}>
         <View style={styles.imageContainer}>
@@ -33,11 +38,19 @@ const MoviePreview = ({movieData, navigation}) => {
           </Text>
           <View style={styles.statisticsContainer}>
             <View style={styles.labelIcon}>
-              <Icon name="star" color={Colors.yellow} />
+              <Icon
+                name="star"
+                color={Colors.yellow}
+                size={normalizeIconSize(25)}
+              />
               <Text style={styles.statisticsLabel}> {vote_count}</Text>
             </View>
             <View style={styles.labelIcon}>
-              <Icon name="person" />
+              <Icon
+                name="person"
+                color={Colors.lightBlue}
+                size={normalizeIconSize(25)}
+              />
               <Text style={styles.statisticsLabel}>
                 {' '}
                 {Math.round(popularity)}
@@ -55,8 +68,11 @@ const styles = StyleSheet.create({
     width: '40%',
     margin: '5%',
     backgroundColor: Colors.blue,
-    borderRadius: 10,
+    borderRadius: normalizeBorderRadiusSize(12),
     overflow: 'hidden',
+  },
+  touchable: {
+    flex: 1,
   },
   imageContainer: {
     width: '100%',
@@ -68,7 +84,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     alignItems: 'center',
-    padding: 5,
+    padding: normalizePaddingSize(5),
     flex: 1,
   },
   title: {
@@ -82,8 +98,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     width: '100%',
-    paddingHorizontal: 15,
-    paddingTop: 5,
+    paddingHorizontal: normalizePaddingSize(15),
+    paddingTop: normalizePaddingSize(5),
   },
   labelIcon: {
     flexDirection: 'row',
