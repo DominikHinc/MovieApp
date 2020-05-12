@@ -1,9 +1,16 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Alert, ActivityIndicator} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Alert,
+  ActivityIndicator,
+  Keyboard,
+} from 'react-native';
 import SearchBar from '../components/SearchBar';
 import {searchMovieByTitle} from '../helpers/ApiCall';
 import MoviesPreviewList from '../components/MoviesPreviewList';
 import {Body, Container} from 'native-base';
+import Colors from '../constants/Colors';
 
 const MovieSearchScreen = ({navigation}) => {
   const [movieTitle, setMovieTitle] = useState('Hunger');
@@ -12,17 +19,24 @@ const MovieSearchScreen = ({navigation}) => {
   const [loading, setLoading] = useState(false);
 
   const searchMovie = () => {
+    setLoading(true);
+    Keyboard.dismiss();
     searchMovieByTitle(movieTitle)
       .then(result => {
         setMoviesList(result.results);
       })
       .catch(error => {
         Alert.alert('Something went wrong', error);
+      })
+      .finally(onFinally => {
+        setLoading(false);
       });
   };
 
   const validateInput = text => {
-    setMovieTitle(text);
+    if (text.match(/^[0-9a-zA-Z ]*$/)) {
+      setMovieTitle(text);
+    }
   };
 
   const clearTitle = () => {
@@ -39,10 +53,12 @@ const MovieSearchScreen = ({navigation}) => {
         placeholder="Search Movie"
       />
       <Container style={styles.listContainer}>
-        <MoviesPreviewList moviesList={moviesList} />
+        {!loading && moviesList.length > 0 && (
+          <MoviesPreviewList moviesList={moviesList} />
+        )}
         {loading && (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="black" />
+            <ActivityIndicator size="large" color={Colors.blue} />
           </View>
         )}
       </Container>

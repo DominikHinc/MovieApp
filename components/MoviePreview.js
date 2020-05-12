@@ -26,11 +26,14 @@ const MoviePreview = ({movieData}) => {
         <View style={styles.statisticsContainer}>
           <View style={styles.labelIcon}>
             <Icon name="star" color={Colors.yellow} />
-            <Text style={styles.statisticsLabel}>{vote_count}</Text>
+            <Text style={styles.statisticsLabel}> {vote_count}</Text>
           </View>
           <View style={styles.labelIcon}>
             <Icon name="person" />
-            <Text style={styles.statisticsLabel}>{Math.round(popularity)}</Text>
+            <Text style={styles.statisticsLabel}>
+              {' '}
+              {Math.round(popularity)}
+            </Text>
           </View>
         </View>
       </View>
