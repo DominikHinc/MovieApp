@@ -1,16 +1,15 @@
+import {Container} from 'native-base';
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, Alert, ActivityIndicator} from 'react-native';
+import {ActivityIndicator, Alert, StyleSheet, View} from 'react-native';
 import {Header} from 'react-native-elements';
+import MovieDetails from '../components/MovieDetails';
 import Colors from '../constants/Colors';
+import {getMovieDetails} from '../helpers/ApiCall';
 import {
-  normalizeIconSize,
   normalizeFontSize,
+  normalizeIconSize,
   normalizePaddingSize,
 } from '../helpers/normalizeSizes';
-import MovieDetails from '../components/MovieDetails';
-import {Container} from 'native-base';
-import {getMovieDetails} from '../helpers/ApiCall';
-import MovieOverview from '../components/MovieOverview';
 
 const MovieDetailsScreen = ({navigation, route}) => {
   const {movieData} = route.params;
@@ -57,7 +56,11 @@ const MovieDetailsScreen = ({navigation, route}) => {
         containerStyle={styles.header}
       />
 
-      {!loading && <MovieDetails movieData={movieDetailedData} />}
+      {!loading && (
+        <Container>
+          <MovieDetails movieData={movieDetailedData} />
+        </Container>
+      )}
 
       {loading && (
         <View style={styles.loadingContainer}>
