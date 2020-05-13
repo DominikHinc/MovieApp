@@ -11,7 +11,7 @@ import {
 import MoviesPreviewList from '../components/MoviesPreviewList';
 import SearchBar from '../components/SearchBar';
 import Colors from '../constants/Colors';
-import {searchMovieByTitle} from '../helpers/ApiCall';
+import {searchMoviesByTitle} from '../helpers/ApiCall';
 
 const MovieSearchScreen = ({navigation}) => {
   const [movieTitle, setMovieTitle] = useState('Hunger');
@@ -24,7 +24,7 @@ const MovieSearchScreen = ({navigation}) => {
     setLoading(true);
     Keyboard.dismiss();
     setCouldNotFindAnyMovies(false);
-    searchMovieByTitle(movieTitle)
+    searchMoviesByTitle(movieTitle)
       .then(result => {
         setMoviesList(result.results);
         if (result.results.length === 0) {

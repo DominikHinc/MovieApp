@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, View, Alert, ActivityIndicator} from 'react-native';
 import {Header} from 'react-native-elements';
 import Colors from '../constants/Colors';
 import {
@@ -7,20 +7,39 @@ import {
   normalizeFontSize,
   normalizePaddingSize,
 } from '../helpers/normalizeSizes';
+import MovieDetails from '../components/MovieDetails';
+import {Container} from 'native-base';
+import {getMovieDetails} from '../helpers/ApiCall';
 
 const MovieDetailsScreen = ({navigation, route}) => {
   const {movieData} = route.params;
 
-  const {title} = movieData;
+  const {title, id} = movieData;
+
+  const [movieDetailedData, setMovieDetailedData] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    getMovieDetails(id)
+      .then(result => {
+        setMovieDetailedData(result);
+      })
+      .catch(error => {
+        Alert.alert('Something went wrong', error);
+      })
+      .finally(onFinally => {
+        setLoading(false);
+      });
+  }, [id]);
 
   const goBack = () => {
     if (navigation.canGoBack()) {
       navigation.goBack();
     }
   };
-
   return (
-    <View>
+    <Container style={styles.screen}>
       <Header
         leftComponent={{
           icon: 'arrow-back',
@@ -36,11 +55,22 @@ const MovieDetailsScreen = ({navigation, route}) => {
         backgroundColor={Colors.blue}
         containerStyle={styles.header}
       />
-    </View>
+
+      {!loading && <MovieDetails movieData={movieData} />}
+
+      {loading && (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator color="black" size="large" />
+        </View>
+      )}
+    </Container>
   );
 };
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   header: {
     paddingBottom: normalizePaddingSize(15),
   },
@@ -48,6 +78,12 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: normalizeFontSize(20),
     textAlign: 'center',
+  },
+  loadingContainer: {
+    height: '100%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
