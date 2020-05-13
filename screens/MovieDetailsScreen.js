@@ -56,7 +56,7 @@ const MovieDetailsScreen = ({navigation, route}) => {
         containerStyle={styles.header}
       />
 
-      {!loading && <MovieDetails movieData={movieData} />}
+      {!loading && <MovieDetails movieData={movieDetailedData} />}
 
       {loading && (
         <View style={styles.loadingContainer}>
