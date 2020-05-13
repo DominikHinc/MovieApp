@@ -1,9 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
-import {Container} from 'native-base';
-import {normalizeMarginSize} from '../helpers/normalizeSizes';
-import MovieStatistics from './MovieStatistics';
+import {Image, ScrollView, StyleSheet, View} from 'react-native';
+import {
+  normalizeMarginSize,
+  normalizePaddingSize,
+} from '../helpers/normalizeSizes';
 import MovieOverview from './MovieOverview';
+import MovieStatistics from './MovieStatistics';
 
 const MovieDetails = ({movieData}) => {
   const {
@@ -19,7 +21,9 @@ const MovieDetails = ({movieData}) => {
 
   return (
     <View styles={styles.detailsMainContainer}>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollViewContainer}>
         <View>
           <View style={styles.topInfoContainer}>
             <View style={styles.posterContainer}>
@@ -58,10 +62,11 @@ const MovieDetails = ({movieData}) => {
 const styles = StyleSheet.create({
   detailsMainContainer: {
     flex: 1,
-    height: '100%',
-    width: '100%',
   },
   scrollView: {},
+  scrollViewContainer: {
+    // paddingBottom: normalizePaddingSize(100),
+  },
   topInfoContainer: {
     flexDirection: 'row',
   },

@@ -9,17 +9,15 @@ const MoviesPreviewList = ({moviesList, navigation}) => {
   };
 
   return (
-    <Container>
-      <FlatList
-        numColumns={2}
-        data={moviesList}
-        renderItem={renderMoviePreview}
-        keyExtractor={item => {
-          return item.id.toString();
-        }}
-        style={styles.list}
-      />
-    </Container>
+    <FlatList
+      numColumns={2}
+      data={moviesList}
+      renderItem={renderMoviePreview}
+      keyExtractor={item => {
+        return item.id.toString();
+      }}
+      style={styles.list}
+    />
   );
 };
 

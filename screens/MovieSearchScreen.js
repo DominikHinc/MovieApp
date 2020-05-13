@@ -62,7 +62,7 @@ const MovieSearchScreen = ({navigation}) => {
         {!loading && moviesList.length > 0 && (
           <MoviesPreviewList moviesList={moviesList} navigation={navigation} />
         )}
-        {couldNotFindAnyMovies && (
+        {couldNotFindAnyMovies && !loading && (
           <View style={styles.loadingContainer}>
             <Text>Could not find any movies</Text>
           </View>
