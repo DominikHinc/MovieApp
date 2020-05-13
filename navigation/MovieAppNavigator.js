@@ -5,7 +5,7 @@ import MovieDetailsScreen from '../screens/MovieDetailsScreen';
 
 const MovieAppStackNavigator = createStackNavigator();
 
-function movieAppStack() {
+const movieAppStack = () => {
   return (
     <MovieAppStackNavigator.Navigator headerMode="none">
       <MovieAppStackNavigator.Screen
@@ -18,6 +18,6 @@ function movieAppStack() {
       />
     </MovieAppStackNavigator.Navigator>
   );
-}
+};
 
 export default movieAppStack;

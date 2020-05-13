@@ -2,6 +2,8 @@ import {Button, Header, Icon, Input, Item} from 'native-base';
 import React from 'react';
 import {Text} from 'react-native';
 
+// Component responsible for creating search bar
+
 const SearchBar = ({
   value,
   onChangeText,

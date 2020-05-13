@@ -6,6 +6,8 @@ import {
   normalizePaddingSize,
 } from '../helpers/normalizeSizes';
 
+// Component responsible for displaying a movie's overview
+
 const MovieOverview = ({overview}) => {
   return (
     <View style={styles.overviewContainer}>

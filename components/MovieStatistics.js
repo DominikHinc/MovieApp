@@ -8,6 +8,8 @@ import {
   normalizePaddingSize,
 } from '../helpers/normalizeSizes';
 
+// Component responsible for displaying short detailed information about a given movie
+
 const MovieStatistics = ({
   popularity = 0,
   vote_count = 0,

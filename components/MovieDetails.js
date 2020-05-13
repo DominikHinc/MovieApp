@@ -7,6 +7,8 @@ import {
 import MovieOverview from './MovieOverview';
 import MovieStatistics from './MovieStatistics';
 
+// Component responsible for displaying detailed information about a given movie
+
 const MovieDetails = ({movieData}) => {
   const {
     poster_path = null,

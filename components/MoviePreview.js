@@ -10,6 +10,9 @@ import {
   normalizePaddingSize,
 } from '../helpers/normalizeSizes';
 
+// Component responsible for displaying basic information about a given movie
+// Used in MoviesPreview list
+
 const MoviePreview = ({movieData, navigation}) => {
   const {title, poster_path, popularity, vote_count} = movieData;
 
