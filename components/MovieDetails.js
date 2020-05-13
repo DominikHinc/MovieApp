@@ -31,7 +31,7 @@ const MovieDetails = ({movieData}) => {
                 uri:
                   poster_path !== null
                     ? `https://image.tmdb.org/t/p/w500${poster_path}`
-                    : `https://resizing.flixster.com/kAZuhKR05XNS9t4e5pNoaKzLF9Q=/206x305/v1.bTsxMjExNzU1ODtqOzE4MzY1OzEyMDA7MjAwOzMwMA`,
+                    : `https://www.movienewz.com/img/films/poster-holder.jpg`,
               }}
             />
           </View>
