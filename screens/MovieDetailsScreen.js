@@ -7,7 +7,6 @@ import Colors from '../constants/Colors';
 import {getMovieDetails} from '../helpers/ApiCall';
 import {
   normalizeFontSize,
-  normalizeIconSize,
   normalizePaddingSize,
 } from '../helpers/normalizeSizes';
 
@@ -45,7 +44,7 @@ const MovieDetailsScreen = ({navigation, route}) => {
         leftComponent={{
           icon: 'arrow-back',
           color: '#fff',
-          size: normalizeIconSize(30),
+          size: 30,
           onPress: goBack,
         }}
         centerComponent={{

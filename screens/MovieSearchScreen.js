@@ -17,8 +17,8 @@ import {searchMoviesByTitle} from '../helpers/ApiCall';
 const MovieSearchScreen = ({navigation}) => {
   const [movieTitle, setMovieTitle] = useState('');
   const [moviesList, setMoviesList] = useState([]);
-  const [couldNotFindAnyMovies, setCouldNotFindAnyMovies] = useState(false);
 
+  const [couldNotFindAnyMovies, setCouldNotFindAnyMovies] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const netInfo = useNetInfo();
@@ -33,6 +33,7 @@ const MovieSearchScreen = ({navigation}) => {
       setLoading(true);
       Keyboard.dismiss();
       setCouldNotFindAnyMovies(false);
+
       searchMoviesByTitle(movieTitle)
         .then(result => {
           setMoviesList(result.results);
