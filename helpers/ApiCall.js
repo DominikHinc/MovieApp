@@ -1,5 +1,7 @@
 const DEMO_API_KEY = '537ca03eb6a299197faae1711d7e0f8a';
 
+// Function responsible for fetching list of movie data
+
 export const searchMovieByTitle = title => {
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${DEMO_API_KEY}&language=en-US&page=1&include_adult=false&query=${title}`;
 

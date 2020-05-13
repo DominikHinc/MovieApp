@@ -6,6 +6,7 @@ import {
   normalizePaddingSize,
   normalizeBorderRadiusSize,
   normalizeIconSize,
+  normalizeFontSize,
 } from '../helpers/normalizeSizes';
 
 const MoviePreview = ({movieData, navigation}) => {
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 15,
+    fontSize: normalizeFontSize(17),
     color: 'white',
     textAlign: 'center',
   },
