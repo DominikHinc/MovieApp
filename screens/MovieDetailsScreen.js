@@ -10,6 +10,7 @@ import {
   normalizeIconSize,
   normalizePaddingSize,
 } from '../helpers/normalizeSizes';
+import {useNetInfo} from '@react-native-community/netinfo';
 
 const MovieDetailsScreen = ({navigation, route}) => {
   const {movieData} = route.params;
@@ -19,18 +20,28 @@ const MovieDetailsScreen = ({navigation, route}) => {
   const [movieDetailedData, setMovieDetailedData] = useState({});
   const [loading, setLoading] = useState(true);
 
+  const netInfo = useNetInfo();
+
   useEffect(() => {
-    setLoading(true);
-    getMovieDetails(id)
-      .then(result => {
-        setMovieDetailedData(result);
-      })
-      .catch(error => {
-        Alert.alert('Something went wrong', error);
-      })
-      .finally(onFinally => {
-        setLoading(false);
-      });
+    if (netInfo.isConnected === false) {
+      Alert.alert(
+        'Something went wrong',
+        'You are not connected to the internet',
+      );
+      goBack();
+    } else {
+      setLoading(true);
+      getMovieDetails(id)
+        .then(result => {
+          setMovieDetailedData(result);
+        })
+        .catch(error => {
+          Alert.alert('Something went wrong', error);
+        })
+        .finally(onFinally => {
+          setLoading(false);
+        });
+    }
   }, [id]);
 
   const goBack = () => {

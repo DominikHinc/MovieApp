@@ -1,4 +1,3 @@
-import {Container} from 'native-base';
 import React from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import MoviePreview from './MoviePreview';
@@ -27,4 +26,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MoviesPreviewList;
+export default React.memo(MoviesPreviewList);

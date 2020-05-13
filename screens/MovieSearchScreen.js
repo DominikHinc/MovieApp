@@ -12,6 +12,7 @@ import MoviesPreviewList from '../components/MoviesPreviewList';
 import SearchBar from '../components/SearchBar';
 import Colors from '../constants/Colors';
 import {searchMoviesByTitle} from '../helpers/ApiCall';
+import {useNetInfo} from '@react-native-community/netinfo';
 
 const MovieSearchScreen = ({navigation}) => {
   const [movieTitle, setMovieTitle] = useState('Hunger');
@@ -20,23 +21,32 @@ const MovieSearchScreen = ({navigation}) => {
 
   const [loading, setLoading] = useState(false);
 
+  const netInfo = useNetInfo();
+
   const searchMovie = () => {
-    setLoading(true);
-    Keyboard.dismiss();
-    setCouldNotFindAnyMovies(false);
-    searchMoviesByTitle(movieTitle)
-      .then(result => {
-        setMoviesList(result.results);
-        if (result.results.length === 0) {
-          setCouldNotFindAnyMovies(true);
-        }
-      })
-      .catch(error => {
-        Alert.alert('Something went wrong', error);
-      })
-      .finally(onFinally => {
-        setLoading(false);
-      });
+    if (netInfo.isConnected === false) {
+      Alert.alert(
+        'Something went wrong',
+        'You are not connected to the internet',
+      );
+    } else if (movieTitle.length > 0 && movieTitle !== null) {
+      setLoading(true);
+      Keyboard.dismiss();
+      setCouldNotFindAnyMovies(false);
+      searchMoviesByTitle(movieTitle)
+        .then(result => {
+          setMoviesList(result.results);
+          if (result.results.length === 0) {
+            setCouldNotFindAnyMovies(true);
+          }
+        })
+        .catch(error => {
+          Alert.alert('Something went wrong', error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   };
 
   const validateInput = text => {

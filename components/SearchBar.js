@@ -17,6 +17,7 @@ const SearchBar = ({
           placeholder={placeholder}
           value={value}
           onChangeText={onChangeText}
+          onSubmitEditing={onLeftIconPress}
         />
         <Icon name="ios-close-circle" onPress={onRightIconPress} />
       </Item>
