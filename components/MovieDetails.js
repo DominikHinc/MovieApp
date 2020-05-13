@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import {Container} from 'native-base';
 import {normalizeMarginSize} from '../helpers/normalizeSizes';
 import MovieStatistics from './MovieStatistics';
+import MovieOverview from './MovieOverview';
 
 const MovieDetails = ({movieData}) => {
   const {
@@ -13,6 +14,7 @@ const MovieDetails = ({movieData}) => {
     release_date,
     production_countries,
     genres,
+    overview,
   } = movieData;
 
   return (
@@ -46,6 +48,7 @@ const MovieDetails = ({movieData}) => {
               />
             </View>
           </View>
+          <MovieOverview overview={overview} />
         </View>
       </ScrollView>
     </View>

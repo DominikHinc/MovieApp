@@ -10,6 +10,7 @@ import {
 import MovieDetails from '../components/MovieDetails';
 import {Container} from 'native-base';
 import {getMovieDetails} from '../helpers/ApiCall';
+import MovieOverview from '../components/MovieOverview';
 
 const MovieDetailsScreen = ({navigation, route}) => {
   const {movieData} = route.params;

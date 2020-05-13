@@ -3,10 +3,9 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Icon} from 'react-native-elements';
 import Colors from '../constants/Colors';
 import {
-  normalizeIconSize,
   normalizeFontSize,
+  normalizeIconSize,
   normalizePaddingSize,
-  normalizeMarginSize,
 } from '../helpers/normalizeSizes';
 
 const MovieStatistics = ({
@@ -18,59 +17,74 @@ const MovieStatistics = ({
 }) => {
   return (
     <View style={styles.statisticsMainContainer}>
-      <View style={styles.infoContainer}>
-        <Icon
-          name="star"
-          color={Colors.yellow}
-          size={normalizeIconSize(25)}
-          style={styles.icon}
-        />
-        <Text style={styles.infoLabel}>{vote_count}</Text>
+      <View>
+        <Text style={styles.title}>Vote count:</Text>
+        <View style={styles.infoContainer}>
+          <Icon
+            name="star"
+            color={Colors.yellow}
+            size={normalizeIconSize(25)}
+            style={styles.icon}
+          />
+          <Text style={styles.infoLabel}>{vote_count}</Text>
+        </View>
       </View>
-      <View style={styles.infoContainer}>
-        <Icon
-          name="person"
-          color={Colors.lightBlue}
-          size={normalizeIconSize(25)}
-          style={styles.icon}
-        />
-        <Text style={styles.infoLabel}>{Math.round(popularity)}</Text>
+      <View>
+        <Text style={styles.title}>Popularity:</Text>
+        <View style={styles.infoContainer}>
+          <Icon
+            name="person"
+            color={Colors.lightBlue}
+            size={normalizeIconSize(25)}
+            style={styles.icon}
+          />
+          <Text style={styles.infoLabel}>{Math.round(popularity)}</Text>
+        </View>
       </View>
-      <View style={styles.infoContainer}>
-        <Icon
-          type="entypo"
-          name="calendar"
-          color={Colors.green}
-          size={normalizeIconSize(25)}
-          style={styles.icon}
-        />
-        <Text style={styles.infoLabel}>{release_date}</Text>
+      <View>
+        <Text style={styles.title}>Release date:</Text>
+        <View style={styles.infoContainer}>
+          <Icon
+            type="entypo"
+            name="calendar"
+            color={Colors.green}
+            size={normalizeIconSize(25)}
+            style={styles.icon}
+          />
+          <Text style={styles.infoLabel}>{release_date}</Text>
+        </View>
       </View>
-      <View style={styles.infoContainer}>
-        <Icon
-          type="font-awesome"
-          name="flag"
-          color={Colors.red}
-          size={normalizeIconSize(25)}
-          style={styles.icon}
-        />
-        <Text style={styles.infoLabel} numberOfLines={2}>
-          {production_country}
-        </Text>
+      <View>
+        <Text style={styles.title}>Country:</Text>
+        <View style={styles.infoContainer}>
+          <Icon
+            type="font-awesome"
+            name="flag"
+            color={Colors.red}
+            size={normalizeIconSize(25)}
+            style={styles.icon}
+          />
+          <Text style={styles.infoLabel} numberOfLines={2}>
+            {production_country}
+          </Text>
+        </View>
       </View>
-      <View style={styles.infoContainer}>
-        <Icon
-          type="font-awesome-5"
-          name="theater-masks"
-          color={Colors.blue}
-          size={normalizeIconSize(25)}
-          style={[styles.icon]}
-        />
-        <Text
-          style={[styles.infoLabel, {paddingLeft: normalizePaddingSize(5)}]}
-          numberOfLines={5}>
-          {genres}
-        </Text>
+      <View>
+        <Text style={styles.title}>Genre:</Text>
+        <View style={styles.infoContainer}>
+          <Icon
+            type="font-awesome-5"
+            name="theater-masks"
+            color={Colors.blue}
+            size={normalizeIconSize(25)}
+            style={[styles.icon]}
+          />
+          <Text
+            style={[styles.infoLabel, {paddingLeft: normalizePaddingSize(5)}]}
+            numberOfLines={5}>
+            {genres}
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -85,6 +99,10 @@ const styles = StyleSheet.create({
   infoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  title: {
+    fontSize: normalizeFontSize(18),
+    fontWeight: 'bold',
   },
   icon: {},
   infoLabel: {
