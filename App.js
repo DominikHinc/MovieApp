@@ -1,6 +1,5 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import React from 'react';
 import MovieAppNavigator from './navigation/MovieAppNavigator';
 
 const App = () => {
@@ -10,7 +9,5 @@ const App = () => {
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default App;

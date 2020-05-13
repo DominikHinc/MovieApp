@@ -1,3 +1,4 @@
+import {useNetInfo} from '@react-native-community/netinfo';
 import {Container} from 'native-base';
 import React, {useState} from 'react';
 import {
@@ -5,17 +6,16 @@ import {
   Alert,
   Keyboard,
   StyleSheet,
-  View,
   Text,
+  View,
 } from 'react-native';
 import MoviesPreviewList from '../components/MoviesPreviewList';
 import SearchBar from '../components/SearchBar';
 import Colors from '../constants/Colors';
 import {searchMoviesByTitle} from '../helpers/ApiCall';
-import {useNetInfo} from '@react-native-community/netinfo';
 
 const MovieSearchScreen = ({navigation}) => {
-  const [movieTitle, setMovieTitle] = useState('Hunger');
+  const [movieTitle, setMovieTitle] = useState('');
   const [moviesList, setMoviesList] = useState([]);
   const [couldNotFindAnyMovies, setCouldNotFindAnyMovies] = useState(false);
 
@@ -29,7 +29,7 @@ const MovieSearchScreen = ({navigation}) => {
         'Something went wrong',
         'You are not connected to the internet',
       );
-    } else if (movieTitle.length > 0 && movieTitle !== null) {
+    } else if (movieTitle.length > 0 && movieTitle !== null && !loading) {
       setLoading(true);
       Keyboard.dismiss();
       setCouldNotFindAnyMovies(false);

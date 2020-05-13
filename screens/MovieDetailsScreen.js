@@ -1,5 +1,5 @@
 import {Container} from 'native-base';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, Alert, StyleSheet, View} from 'react-native';
 import {Header} from 'react-native-elements';
 import MovieDetails from '../components/MovieDetails';
@@ -10,7 +10,6 @@ import {
   normalizeIconSize,
   normalizePaddingSize,
 } from '../helpers/normalizeSizes';
-import {useNetInfo} from '@react-native-community/netinfo';
 
 const MovieDetailsScreen = ({navigation, route}) => {
   const {movieData} = route.params;
@@ -20,35 +19,26 @@ const MovieDetailsScreen = ({navigation, route}) => {
   const [movieDetailedData, setMovieDetailedData] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const netInfo = useNetInfo();
-
   useEffect(() => {
-    if (netInfo.isConnected === false) {
-      Alert.alert(
-        'Something went wrong',
-        'You are not connected to the internet',
-      );
-      goBack();
-    } else {
-      setLoading(true);
-      getMovieDetails(id)
-        .then(result => {
-          setMovieDetailedData(result);
-        })
-        .catch(error => {
-          Alert.alert('Something went wrong', error);
-        })
-        .finally(onFinally => {
-          setLoading(false);
-        });
-    }
-  }, [id]);
+    setLoading(true);
+    getMovieDetails(id)
+      .then(result => {
+        setMovieDetailedData(result);
+      })
+      .catch(error => {
+        Alert.alert('Something went wrong', error);
+        goBack();
+      })
+      .finally(onFinally => {
+        setLoading(false);
+      });
+  }, [goBack, id, setLoading]);
 
-  const goBack = () => {
+  const goBack = useCallback(() => {
     if (navigation.canGoBack()) {
       navigation.goBack();
     }
-  };
+  }, [navigation]);
   return (
     <Container style={styles.screen}>
       <Header

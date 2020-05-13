@@ -9,11 +9,11 @@ import {
 } from '../helpers/normalizeSizes';
 
 const MovieStatistics = ({
-  popularity,
-  vote_count,
-  release_date,
-  production_country,
-  genres,
+  popularity = 0,
+  vote_count = 0,
+  release_date = 'unknown',
+  production_country = 'unknown',
+  genres = 'unknown',
 }) => {
   return (
     <View style={styles.statisticsMainContainer}>
@@ -82,7 +82,7 @@ const MovieStatistics = ({
           <Text
             style={[styles.infoLabel, {paddingLeft: normalizePaddingSize(5)}]}
             numberOfLines={5}>
-            {genres}
+            {genres.toString() === genres ? genres : 'unknown'}
           </Text>
         </View>
       </View>

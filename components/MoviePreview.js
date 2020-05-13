@@ -1,19 +1,29 @@
+import {useNetInfo} from '@react-native-community/netinfo';
 import React from 'react';
-import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {Alert, Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Icon, Text} from 'react-native-elements';
 import Colors from '../constants/Colors';
 import {
-  normalizePaddingSize,
   normalizeBorderRadiusSize,
-  normalizeIconSize,
   normalizeFontSize,
+  normalizeIconSize,
+  normalizePaddingSize,
 } from '../helpers/normalizeSizes';
 
 const MoviePreview = ({movieData, navigation}) => {
   const {title, poster_path, popularity, vote_count} = movieData;
 
+  const netInfo = useNetInfo();
+
   const navigateToDetailsScreen = () => {
-    navigation.navigate('MovieDetails', {movieData});
+    if (netInfo.isConnected === true) {
+      navigation.navigate('MovieDetails', {movieData});
+    } else {
+      Alert.alert(
+        'Something went wrong',
+        'You are not connected to the internet',
+      );
+    }
   };
 
   return (

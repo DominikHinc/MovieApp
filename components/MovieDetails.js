@@ -6,18 +6,16 @@ import {
 } from '../helpers/normalizeSizes';
 import MovieOverview from './MovieOverview';
 import MovieStatistics from './MovieStatistics';
-import {Container} from 'native-base';
 
 const MovieDetails = ({movieData}) => {
   const {
-    poster_path,
-    id,
-    popularity,
-    vote_count,
-    release_date,
-    production_countries,
-    genres,
-    overview,
+    poster_path = null,
+    popularity = 'unknown',
+    vote_count = 'unknown',
+    release_date = 'unknown',
+    production_countries = 'unknown',
+    genres = ['unknown'],
+    overview = 'unknown',
   } = movieData;
 
   return (
@@ -42,13 +40,20 @@ const MovieDetails = ({movieData}) => {
               popularity={popularity}
               vote_count={vote_count}
               release_date={release_date}
-              production_country={production_countries[0].name}
-              genres={genres.reduce(
-                (previousValue, currentValue, currentIndex) =>
-                  currentIndex === 1
-                    ? previousValue.name + ', ' + currentValue.name
-                    : previousValue + ', ' + currentValue.name,
-              )}
+              production_country={
+                production_countries[0] !== undefined
+                  ? production_countries[0].name
+                  : 'unknown'
+              }
+              genres={
+                genres.length > 0
+                  ? genres.reduce((previousValue, currentValue, currentIndex) =>
+                      currentIndex === 1
+                        ? previousValue.name + ', ' + currentValue.name
+                        : previousValue + ', ' + currentValue.name,
+                    )
+                  : 'unknown'
+              }
             />
           </View>
         </View>

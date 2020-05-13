@@ -21,6 +21,8 @@ export const searchMoviesByTitle = title => {
   });
 };
 
+// Function responsible for fetching details of movie
+
 export const getMovieDetails = id => {
   const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${DEMO_API_KEY}&language=en-US`;
 
